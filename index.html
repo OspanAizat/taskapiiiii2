@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  <title>Aizat</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .btnzhasyl {
+    border: none;
+    background-color: #32ff84;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    }
+    .btnzhasyl:hover {
+    background-color: #2de673;
+    box-shadow: 0 0 25px rgba(50, 255, 132, 1);
+    }
+  </style>
+</head>
+<body style="background-color: hsl(218, 23%, 16%);display: flex;justify-content: center;align-items: center;min-height: 100vh;text-align: center;position: relative;">
+  <div class="container" style="background-color: hsl(217, 19%, 24%);width:550px;border-radius: 10px;padding: 5px;padding-bottom: 50px;box-shadow: 8px 10px 10px rgba(0, 0, 0, 0.1);">
+    <p class="nomer" style="font-weight: 600;font-size:13px;color: hsl(150, 100%, 66%)">ADVICE #<span>0</span></p>
+    <p class="adv" style="color:white;font-weight: 800;font-size:20px;padding: 5px;"></p>
+    <img src="images/pattern-divider-desktop.svg">
+    <div class="btnzhasyl" style="background-color: hsl(150, 100%, 66%);border-radius: 50%;width:45px;height:45px;padding: 3px;position: absolute;top:445px;left:700px;">
+      <img style="width:25px;height:25px;margin-top: 10px;" src="images/icon-dice.svg">
+    </div>
+  </div>
+  <script>
+    const advice_URL = 'https://api.adviceslip.com/advice';
+    async function quote(){
+        const promise = await fetch(advice_URL);
+        const responce = await promise.json();
+        const adv=document.querySelector('.adv');
+        adv.innerHTML= responce.slip.advice;
+    }
+    document.querySelector('.btnzhasyl').addEventListener('click',quote);
+
+    const nomer = document.querySelector('.nomer')
+
+    let x = 0;
+    document.querySelector('.btnzhasyl').addEventListener('click', function(){
+        x++;
+        nomer.textContent = "Advice #" + x;
+    });
+  </script>
+</body>
+</html>
